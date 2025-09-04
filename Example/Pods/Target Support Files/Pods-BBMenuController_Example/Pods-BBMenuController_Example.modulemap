@@ -1,0 +1,6 @@
+framework module Pods_BBMenuController_Example {
+  umbrella header "Pods-BBMenuController_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

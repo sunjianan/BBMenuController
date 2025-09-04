@@ -1,0 +1,16 @@
+PODS:
+  - BBMenuController (0.0.1)
+
+DEPENDENCIES:
+  - BBMenuController (from `../`)
+
+EXTERNAL SOURCES:
+  BBMenuController:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BBMenuController: 206519ca0106549cef243346dfefa461a5d0bcad
+
+PODFILE CHECKSUM: c7f95dd5e41728d6f9b8c6e430ff7796669977b7
+
+COCOAPODS: 1.16.2

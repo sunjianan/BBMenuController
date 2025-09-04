@@ -1,0 +1,6 @@
+framework module BBMenuController {
+  umbrella header "BBMenuController-umbrella.h"
+
+  export *
+  module * { export * }
+}
