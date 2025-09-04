@@ -19,5 +19,7 @@
 
 - (void)hideMenu:(BBMenuViewContainer *)menu;
 
+- (void)hide;
+
 @end
     

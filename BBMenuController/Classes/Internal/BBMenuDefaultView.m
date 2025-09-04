@@ -8,6 +8,7 @@
 
 #import "BBMenuDefaultView.h"
 #import "BBMenuController.h"
+#import "BBMenuEffectsWindow.h"
 #import "BBMenuViewContainer.h"
 #import "BBAdjustButton.h"
 #import "BBMenuController_internal.h"
@@ -15,6 +16,10 @@
 @interface BBMenuItemDefaultView:BBAdjustButton
 @property (nonatomic, strong) UIColor  *highlightedColor;
 @property (nonatomic, strong) UIImageView  *effectView;
+
+@property (nonatomic, strong) id customTarget;
+@property (nonatomic) SEL customSelector;
+
 @end
 @implementation BBMenuItemDefaultView
 
@@ -23,6 +28,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addObserver:self forKeyPath:@"highlighted" options:NSKeyValueObservingOptionNew context:nil];
+        [self addTarget:self action:@selector(itemDidSelected:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
@@ -73,6 +79,14 @@
     UIGraphicsEndImageContext();
     
     return resultImage;
+}
+
+- (void)itemDidSelected:(id)sender {
+    IMP imp = [self.customTarget methodForSelector:self.customSelector];
+    void (* func)(id, SEL) = (void *)imp;
+    func(self.customTarget, self.customSelector);
+    
+    [[BBMenuEffectsWindow sharedWindow] hide];
 }
 
 @end
@@ -239,7 +253,9 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
             }
           
             BBMenuItemDefaultView *item = [BBMenuItemDefaultView buttonWithType:UIButtonTypeCustom];
-            [item addTarget:obj.target action:obj.action forControlEvents:UIControlEventTouchUpInside];
+            item.customTarget = obj.target;
+            item.customSelector = obj.action;
+//            [item addTarget:obj.target action:obj.action forControlEvents:UIControlEventTouchUpInside];
             item.frame = CGRectMake(totalWidth-itemW, 0, itemW, self.maxSize.height-_arrowSize.height);
             [item setTitle:obj.title forState:UIControlStateNormal];
             item.titleLabel.font =self.container.menuItemFont;
@@ -350,7 +366,9 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
         }
         index = idx+1;
         BBMenuItemDefaultView *item = [BBMenuItemDefaultView buttonWithType:UIButtonTypeCustom];
-        [item addTarget:obj.target action:obj.action forControlEvents:UIControlEventTouchUpInside];
+        item.customTarget = obj.target;
+        item.customSelector = obj.action;
+//        [item addTarget:obj.target action:obj.action forControlEvents:UIControlEventTouchUpInside];
         item.frame = CGRectMake(lastWidth, 0, itemW, self.maxSize.height-_arrowSize.height);
         [item setTitle:obj.title forState:UIControlStateNormal];
         item.titleLabel.font = self.container.menuItemFont;

@@ -1,5 +1,5 @@
 PODS:
-  - BBMenuController (0.0.1)
+  - BBMenuController (0.1.2)
 
 DEPENDENCIES:
   - BBMenuController (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BBMenuController: 206519ca0106549cef243346dfefa461a5d0bcad
+  BBMenuController: 2cfcddfec38d9ea8a97de16531bd62a86cd9c82b
 
 PODFILE CHECKSUM: c7f95dd5e41728d6f9b8c6e430ff7796669977b7
 

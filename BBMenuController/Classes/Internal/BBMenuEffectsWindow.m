@@ -98,6 +98,12 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:BBMenuControllerDidHideMenuNotification object:nil];
 }
 
+- (void)hide {
+    if (self.currentMenu && self.currentMenu.superview && self.currentMenu.hasAutoHide) {
+        [self hideMenu:self.currentMenu];
+    }
+}
+
 - (void)updateWindowLevel
 {
     UIApplication *app =  [UIApplication sharedApplication];
