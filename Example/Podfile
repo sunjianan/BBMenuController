@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'BBMenuController_Example' do
+  pod 'BBMenuController', :path => '../'
+
+  target 'BBMenuController_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
