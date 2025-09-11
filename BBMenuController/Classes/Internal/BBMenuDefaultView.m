@@ -82,9 +82,11 @@
 }
 
 - (void)itemDidSelected:(id)sender {
-    IMP imp = [self.customTarget methodForSelector:self.customSelector];
-    void (* func)(id, SEL) = (void *)imp;
-    func(self.customTarget, self.customSelector);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        IMP imp = [self.customTarget methodForSelector:self.customSelector];
+        void (* func)(id, SEL) = (void *)imp;
+        func(self.customTarget, self.customSelector);
+    });
     
     [[BBMenuEffectsWindow sharedWindow] hide];
 }
