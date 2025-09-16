@@ -52,15 +52,16 @@ static inline CGPoint BBMenuGetXCenter(CGRect rect) {
     self.cornerRadius = 6;
     self.arrowDirection = BBMenuControllerArrowDefault;
     self.arrowSize = CGSizeMake(17, 9.7);
-    self.menuItemFont = [UIFont systemFontOfSize:14];
+    self.menuItemFont = [UIFont systemFontOfSize:16];
     self.imagePosition = BBAdjustButtonIMGPositionLeft;
     self.arrowMargin = 5.5;
     self.menuEdgeInset = UIEdgeInsetsMake(10, 10, 10, 10);
-    self.menuViewHeight = 45.34;
+    self.menuViewHeight = 56;
     self.maxMenuViewWidth = BBMenuScreenWidth;
     self.menuItemTintColor = [UIColor whiteColor];
     self.menuItemHighlightColor = [UIColor lightGrayColor];
-    self.contentLayer.fillColor = [UIColor colorWithRed:26/255 green:26/288 blue:27/255 alpha:1].CGColor;
+    self.lineColor = [UIColor colorWithRed:24.0/255.0 green:28.0/255.0 blue:42.0/255.0 alpha:1];
+    self.contentLayer.fillColor = [UIColor colorWithRed:24.0/255 green:28.0/255.0 blue:42.0/255.0 alpha:1].CGColor;
 }
 
 - (void)layoutSubviews
@@ -125,6 +126,13 @@ static inline CGPoint BBMenuGetXCenter(CGRect rect) {
     _fillColor = fillColor;
     if (fillColor) {
         self.contentLayer.fillColor = fillColor.CGColor;
+    }
+}
+
+- (void)setLineColor:(UIColor *)lineColor {
+    _lineColor = lineColor;
+    if (lineColor) {
+        [self processMenuFrame];
     }
 }
 

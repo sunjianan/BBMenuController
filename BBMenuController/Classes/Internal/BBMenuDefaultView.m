@@ -137,7 +137,8 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
         self.container = container;
         self.contentView = [UIView new];
         [self addSubview:self.contentView];
-          self.menuTintColor = self.container.menuItemTintColor;
+        self.lineColor = self.container.lineColor;
+        self.menuTintColor = self.container.menuItemTintColor;
         self.contentView.layer.cornerRadius = self.container.cornerRadius;
         self.contentView.layer.masksToBounds = YES;
         
@@ -203,7 +204,7 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
 {
     [self.lines removeAllObjects];
     
-    __block CGFloat totalWidth = 0;
+    __block CGFloat totalWidth = 4;
     __block NSUInteger index = 0;
     __weak typeof(self) ws = self;
     
@@ -218,7 +219,7 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
              [test setImage:obj.image forState:UIControlStateNormal];
              test.frame = CGRectMake(0, 0, itemW, self.maxSize.height-_arrowSize.height);
              CGFloat imageW = test.imageView.frame.size.width;
-             itemW +=imageW;
+             itemW +=imageW + 4;
             if (itemW > maxWidth) {
                 itemW = maxWidth;
             }
@@ -240,7 +241,7 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
                 
                 if (idx != 0) {
                     UIView *line = [UIView new];
-                    line.backgroundColor =   self.menuTintColor ?:[UIColor whiteColor];
+                    line.backgroundColor =   self.lineColor ?:[UIColor whiteColor];
                     [self addSubview:line];
                     line.frame = CGRectMake(totalWidth, 0, 1/[UIScreen mainScreen].scale, self.maxSize.height-_arrowSize.height);
                     [self.lines addObject:line];
@@ -263,15 +264,18 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
             item.titleLabel.font =self.container.menuItemFont;
             [item setTitleColor:   self.menuTintColor?:[UIColor whiteColor] forState:UIControlStateNormal];
             item.highlightedColor = self.container.menuItemHighlightColor;
+            
             [self.contentView addSubview:item];
             if (obj.image) {
                 item.imagePosition = self.container.imagePosition;
                 [item setImage:obj.image forState:UIControlStateNormal];
+                [item setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 0)];
+                [item setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
             }
             
             if (idx != 0) {
                 UIView *line = [UIView new];
-                line.backgroundColor =   self.menuTintColor?:[UIColor whiteColor];
+                line.backgroundColor =   self.lineColor?:[UIColor whiteColor];
                 [self addSubview:line];
                 line.frame = CGRectMake(totalWidth-itemW, 0, 1/[UIScreen mainScreen].scale, self.maxSize.height-_arrowSize.height);
                 [self.lines addObject:line];
@@ -279,8 +283,8 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
         }
     }];
     if (needResetLayout) {
-        self.frame = (CGRect){{0,0},{totalWidth,self.maxSize.height}};
-        self.contentView.frame = (CGRect){{0,0},{totalWidth,self.maxSize.height-_arrowSize.height}};
+        self.frame = (CGRect){{0,0},{totalWidth + 4,self.maxSize.height}};
+        self.contentView.frame = (CGRect){{0,0},{totalWidth + 4,self.maxSize.height-_arrowSize.height}};
     }
      [self setCorrectDirection:_CorrectDirection];
     self.totalCount = index;
@@ -315,7 +319,7 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
         moreleft.highlightedColor = self.container.menuItemHighlightColor;
         
         UIView *line = [UIView new];
-        line.backgroundColor =   self.menuTintColor?: [UIColor whiteColor];
+        line.backgroundColor =   self.lineColor?: [UIColor whiteColor];
         [self addSubview:line];
         line.frame = CGRectMake(kMoreWidth, 0, 1/[UIScreen mainScreen].scale, self.maxSize.height-_arrowSize.height);
         [self.lines addObject:line];
@@ -361,7 +365,7 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
             [test setImage:obj.image forState:UIControlStateNormal];
             test.frame = CGRectMake(0, 0, itemW, self.maxSize.height-_arrowSize.height);
             CGFloat imageW = test.imageView.frame.size.width;
-            itemW +=imageW;
+            itemW +=imageW + 4;
             if (itemW > maxWidth) {
                 itemW = maxWidth;
             }
@@ -376,6 +380,7 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
         item.titleLabel.font = self.container.menuItemFont;
          item.highlightedColor = self.container.menuItemHighlightColor;
         [item setTitleColor:  self.menuTintColor?:[UIColor whiteColor] forState:UIControlStateNormal];
+        
         [self.contentView addSubview:item];
         if (obj.image) {
             item.imagePosition = self.container.imagePosition;
@@ -386,7 +391,7 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
         
         if (idx != 0) {
             UIView *line = [UIView new];
-            line.backgroundColor =  self.menuTintColor?: [UIColor whiteColor];
+            line.backgroundColor =  self.lineColor?: [UIColor whiteColor];
             [self addSubview:line];
             line.frame = CGRectMake(lastWidth-itemW, 0, 1/[UIScreen mainScreen].scale, self.maxSize.height-_arrowSize.height);
             [self.lines addObject:line];
@@ -413,7 +418,7 @@ static inline BOOL BBMenuHasContainingInRange(CGFloat index,NSRange range) {
         
         
         UIView *line = [UIView new];
-        line.backgroundColor =   self.menuTintColor?:[UIColor whiteColor];
+        line.backgroundColor =   self.lineColor?:[UIColor whiteColor];
         [self addSubview:line];
         line.frame = CGRectMake(self.frame.size.width-kMoreWidth, 0, 1/[UIScreen mainScreen].scale,self.maxSize.height-_arrowSize.height);
         [self.lines addObject:line];

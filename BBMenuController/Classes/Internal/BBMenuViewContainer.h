@@ -28,6 +28,11 @@
 @property (nonatomic, strong) UIColor  *fillColor;
 
 /**
+ menuView 分割线颜色 Defulat:whiteColor
+ */
+@property (nonatomic, strong) UIColor  *lineColor;
+
+/**
  menuView 圆角
  */
 @property(nonatomic, assign) CGFloat cornerRadius;

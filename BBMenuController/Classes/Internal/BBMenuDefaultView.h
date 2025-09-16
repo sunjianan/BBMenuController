@@ -15,6 +15,7 @@
 @property (nonatomic, assign) CGSize  arrowSize;
 @property (nonatomic, assign) CGPoint anchorPoint;
 @property (nonatomic, strong) UIColor  *menuTintColor;
+@property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) BBMenuControllerArrowDirection  CorrectDirection;
 +(instancetype)defaultView:(BBMenuViewContainer*)container WithMenuItems:(NSArray<BBMenuItem*>*)menuItems MaxSize:(CGSize)maxSize arrowSize:(CGSize)arrowSize AnchorPoint:(CGPoint)anchorPoint;
 - (void)processLineWithMidX:(CGFloat)midX direction:(BBMenuControllerArrowDirection)direction;
